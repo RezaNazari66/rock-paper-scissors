@@ -80,18 +80,18 @@ private fun ControllerButtons(
 
 @Composable
 private fun ScoreBoard(
-    challenge: ScoreBoard?,
+    scoreBoard: ScoreBoard?,
 ) {
-    val isChallengeValid = challenge?.first?.type != null && challenge.second?.type != null
+    val isChallengeValid = scoreBoard?.first?.type != null && scoreBoard.second?.type != null
     if (isChallengeValid) {
         Text(
             text = stringResource(
                 id = R.string.vs,
-                challenge?.first?.type.toString(),
-                challenge?.second?.type.toString()
+                scoreBoard?.first?.type.toString(),
+                scoreBoard?.second?.type.toString()
             )
         )
-        challenge?.winner?.type?.let {
+        scoreBoard?.winner?.type?.let {
             Text(text = stringResource(id = R.string.winner, it))
         }
     }

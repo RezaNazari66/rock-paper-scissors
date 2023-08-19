@@ -131,4 +131,74 @@ class GameUtilsTest {
 
         assertEquals(45, adjustedAngle)
     }
+
+    @Test
+    fun `test determineLoserInCollision should return Scissor when first is Rock and second Scissor`() {
+        val item1 =
+            GameItem(xPosition = 100.0, yPosition = 200.0, angle = 45, type = GameItemType.ROCK)
+        val item2 =
+            GameItem(xPosition = 100.0, yPosition = 200.0, angle = 45, type = GameItemType.SCISSOR)
+
+        assertEquals(item2, GameUtils.determineLoserInCollision(item1, item2))
+    }
+
+    @Test
+    fun `test determineLoserInCollision should return Scissor when first is Scissor and second Rock`() {
+        val item1 =
+            GameItem(xPosition = 100.0, yPosition = 200.0, angle = 45, type = GameItemType.SCISSOR)
+        val item2 =
+            GameItem(xPosition = 100.0, yPosition = 200.0, angle = 45, type = GameItemType.ROCK)
+
+        assertEquals(item1, GameUtils.determineLoserInCollision(item1, item2))
+    }
+
+    @Test
+    fun `test determineLoserInCollision should return Rock when first is Rock and second Paper`() {
+        val item1 =
+            GameItem(xPosition = 100.0, yPosition = 200.0, angle = 45, type = GameItemType.ROCK)
+        val item2 =
+            GameItem(xPosition = 100.0, yPosition = 200.0, angle = 45, type = GameItemType.PAPER)
+
+        assertEquals(item1, GameUtils.determineLoserInCollision(item1, item2))
+    }
+
+    @Test
+    fun `test determineLoserInCollision should return Paper when first is Paper and second Scissor`() {
+        val item1 =
+            GameItem(xPosition = 100.0, yPosition = 200.0, angle = 45, type = GameItemType.PAPER)
+        val item2 =
+            GameItem(xPosition = 100.0, yPosition = 200.0, angle = 45, type = GameItemType.SCISSOR)
+
+        assertEquals(item1, GameUtils.determineLoserInCollision(item1, item2))
+    }
+
+    @Test
+    fun `test determineLoserInCollision should return null when first is Paper and second Paper`() {
+        val item1 =
+            GameItem(xPosition = 100.0, yPosition = 200.0, angle = 45, type = GameItemType.PAPER)
+        val item2 =
+            GameItem(xPosition = 100.0, yPosition = 200.0, angle = 45, type = GameItemType.PAPER)
+
+        assertEquals(null, GameUtils.determineLoserInCollision(item1, item2))
+    }
+
+    @Test
+    fun `test determineLoserInCollision should return null when first is Rock and second Rock`() {
+        val item1 =
+            GameItem(xPosition = 100.0, yPosition = 200.0, angle = 45, type = GameItemType.ROCK)
+        val item2 =
+            GameItem(xPosition = 100.0, yPosition = 200.0, angle = 45, type = GameItemType.ROCK)
+
+        assertEquals(null, GameUtils.determineLoserInCollision(item1, item2))
+    }
+
+    @Test
+    fun `test determineLoserInCollision should return null when first is Scissor and second Scissor`() {
+        val item1 =
+            GameItem(xPosition = 100.0, yPosition = 200.0, angle = 45, type = GameItemType.SCISSOR)
+        val item2 =
+            GameItem(xPosition = 100.0, yPosition = 200.0, angle = 45, type = GameItemType.SCISSOR)
+
+        assertEquals(null, GameUtils.determineLoserInCollision(item1, item2))
+    }
 }

@@ -113,24 +113,14 @@ class GameEngine(
         return newList
     }
 
-    private fun determineLoserInCollision(first: GameItem, second: GameItem): GameItem {
-        return when (Pair(first.type, second.type)) {
-            GameItemType.ROCK to GameItemType.SCISSOR,
-            GameItemType.SCISSOR to GameItemType.PAPER,
-            GameItemType.PAPER to GameItemType.ROCK,
-            -> second
-
-            else -> first
-        }
-    }
 
     private suspend fun handleCollisionsAndRemoveItems(itemList: MutableList<GameItem>) {
         var removableItem: GameItem? = null
         val collidedPair = GameUtils.findCollidedItemsPair(itemList)
         if (collidedPair != null) {
-            removableItem = determineLoserInCollision(collidedPair.first, collidedPair.second)
-            val winner =
-                if (collidedPair.first == removableItem) collidedPair.second else collidedPair.first
+            removableItem =
+                GameUtils.determineLoserInCollision(collidedPair.first, collidedPair.second)
+            val winner = determineWinnerFromLoser(collidedPair, removableItem)
             onUpdateScoreBoard(
                 ScoreBoard(
                     collidedPair.first,
@@ -143,6 +133,17 @@ class GameEngine(
         this.gameItemList = itemList.filter { it != removableItem }
         onUpdateGameList(gameItemList)
         onUpdateScoreBoard(null)
+    }
+
+    private fun determineWinnerFromLoser(
+        collidedPair: Pair<GameItem, GameItem>,
+        removableItem: GameItem?,
+    ): GameItem? {
+        return when {
+            removableItem == null -> null
+            collidedPair.first == removableItem -> collidedPair.second
+            else -> collidedPair.first
+        }
     }
 
     fun startGame() {

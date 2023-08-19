@@ -6,4 +6,3 @@ data class GameState(
     val isGameStarted: Boolean = false,
 )
 
-data class ScoreBoard(val first: GameItem?, val second: GameItem?, val winner: GameItem?)

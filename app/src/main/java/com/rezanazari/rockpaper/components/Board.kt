@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,7 +36,7 @@ fun Board(state: GameState, setScreenWidth: (Dp) -> Unit) {
                 modifier = Modifier
                     .offset(x = it.xPosition.dp, y = it.yPosition.dp)
                     .background(
-                        it.type.color, RoundedCornerShape(0.dp)
+                        it.type.color
                     )
             ) {
                 Text(

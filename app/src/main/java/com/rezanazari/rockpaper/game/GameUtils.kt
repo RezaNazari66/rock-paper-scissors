@@ -2,6 +2,7 @@ package com.rezanazari.rockpaper.game
 
 import androidx.compose.ui.unit.Dp
 import com.rezanazari.rockpaper.model.GameItem
+import com.rezanazari.rockpaper.model.GameItemType
 
 object GameUtils {
 
@@ -22,7 +23,7 @@ object GameUtils {
                 && item1 != item2
     }
 
-    fun calculateAdjustedBounceAngle(item: GameItem, screenWidth: Dp, padding:Int): Int {
+    fun calculateAdjustedBounceAngle(item: GameItem, screenWidth: Dp, padding: Int): Int {
         val maxPosition = screenWidth.value - padding
         if (item.xPosition <= padding || (item.xPosition >= maxPosition)) {
             return 180 - item.angle
@@ -31,6 +32,19 @@ object GameUtils {
             return item.angle * -1
         }
         return item.angle
+    }
+
+
+    fun determineLoserInCollision(first: GameItem, second: GameItem): GameItem? {
+        return when {
+            first.type == second.type -> null
+            Pair(first.type, second.type) == GameItemType.ROCK to GameItemType.SCISSOR ||
+                    Pair(first.type, second.type) == GameItemType.SCISSOR to GameItemType.PAPER ||
+                    Pair(first.type, second.type) == GameItemType.PAPER to GameItemType.ROCK
+            -> second
+
+            else -> first
+        }
     }
 
 }
