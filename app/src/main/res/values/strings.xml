@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Rock Paper Scissor</string>
+    <string name="restart">Restart</string>
+    <string name="pause">Pause</string>
+    <string name="start">Start</string>
+    <string name="winner">Winner = %s</string>
+    <string name="vs">%s vs %s</string>
 </resources>
